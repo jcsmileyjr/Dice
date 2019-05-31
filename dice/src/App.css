@@ -1,3 +1,10 @@
+/********   Start of Global    ********/
+.center {
+  text-align: center;
+}
+/********   End of Global    ********/
+
+/********** Old Stuff*********/
 .App {
   text-align: center;
 }
@@ -31,3 +38,5 @@
     transform: rotate(360deg);
   }
 }
+
+/********** Old Stuff*********/

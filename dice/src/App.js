@@ -73,16 +73,25 @@ class App extends Component{
     }));
 
     //establish the point for the user
-    if(this.state.point === 0){
+    if(this.state.point === 0 || this.state.point === "Win" || this.state.point === "Lost"){
       let text = "Roll Again";
       this.establishPoint(newPoint, text);  
     }
      
-    //if the user hit the point, reset the game
+    //if the user hit the point, reset the game and show the user they won
     if(newPoint === this.state.point){
-      let text = "Start Game";
-      this.resetGame(newPoint,text)
+      let text = "Play Again";
+      const winLoss = true;
+      this.resetGame(newPoint,text, winLoss);
     }
+
+    //if the user hit a 7, reset the game and show the user they lost
+    if(newPoint === 7){
+      let text = "Play Again";
+      const winLoss = false;
+      this.resetGame(newPoint,text, winLoss);
+    }  
+console.log(this.state.point);      
   }
 
   //set the point for the user, change the button text and instruction's text
@@ -101,10 +110,17 @@ class App extends Component{
   }
   
   //If the point is hit, reset game state
-  resetGame = (point, text) =>{
-    this.setState(previousState => ({
-      point: 0,
-    }));    
+  resetGame = (point, text, winLoss) =>{
+    if(winLoss) {
+      this.setState(previousState => ({
+        point: "Win",
+      }));
+    }else {
+      this.setState(previousState => ({
+        point: "Lost",
+      }));      
+    }
+    
 
     this.setState(previousState => ({
       instructions: "The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7.",

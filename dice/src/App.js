@@ -4,9 +4,9 @@ import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceFive, faDiceTwo} from '@fortawesome/free-solid-svg-icons'
+import { faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faDiceFive, faDiceTwo);
+library.add(faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne);
 
 function Title(props){
   return(
@@ -22,13 +22,23 @@ function Title(props){
 
 function Dice(props){
   return(
-    <Container className="center">
+    <Container>
       <Row>
-        <Col><h2>Dice</h2></Col>
-      </Row>
-      <Row>
-        <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
-        <Col><FontAwesomeIcon icon="dice-two" size="6x"/></Col>
+        {props.dice === 5 &&
+          <Col><FontAwesomeIcon icon="dice-five" size="6x" color="navy"/></Col>
+        }
+        {props.dice === 4 &&
+          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+        }
+        {props.dice === 3 &&
+          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+        }
+        {props.dice === 2 &&
+          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+        }  
+        {props.dice === 1 &&
+          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+        }                         
       </Row>
     </Container>
   );
@@ -38,9 +48,9 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state ={
-      leftDice:"",
-      rightDice:"",
-      point:0,
+      leftDice:5,
+      rightDice:5,
+      point:10,
       dice:"",
       buttonText:"Start Game",
       instructions:"",
@@ -49,9 +59,17 @@ class App extends Component{
 
   render(){
     return(
-      <Container>
-        <Row><Title /></Row>
-        <Row><Dice /></Row>
+      <Container className="appBackground">
+        <Row><Title /></Row>        
+        <Row>
+          <Col className="leftDice"><Dice dice = {this.state.leftDice} /></Col>
+          <Col className="rightDice"><Dice dice = {this.state.rightDice} /></Col>
+        </Row>
+        <Row>
+          <Col xs={{span:8, offset:2}} sm={{span:4, offset:4}} className="pointArea">
+            {this.state.point !== 0 && this.state.point}
+          </Col>
+        </Row>
       </Container>      
     );
   }

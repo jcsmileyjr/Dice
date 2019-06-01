@@ -81,8 +81,10 @@ class App extends Component{
     if(this.state.point === 0 || this.state.point === "Win" || this.state.point === "Lose"){
       if(newPoint === 7){
         this.resetGameWin();
+        return;
       }else if(newPoint === 2 || newPoint===3){
         this.resetGameLose();
+        return;
       }else {
         let text = "Roll Again";
         this.establishPoint(newPoint, text);  

@@ -13,7 +13,7 @@ function Title(props){
   return(
     <Container>
       <Row>
-        <Col className="center">
+        <Col className="center blueColor">
         <h1>Let's Play Dice</h1>
         </Col>
       </Row>
@@ -26,8 +26,15 @@ function Display(props){
   return(
     <Container>
       <Row>
-        <Col xs={{span:7, offset:1}} sm={{span:4, offset:4}} md={{span:4, offset:3}} lg={{span:3, offset:4}} className="displayData">{props.title}</Col>
-        <Col xs={4} sm={4} md={4} className="displayData rightAlignData">{props.data}</Col>
+        <Col  xs={{span:7, offset:1}} 
+              sm={{span:4, offset:4}} 
+              md={{span:4, offset:3}} 
+              lg={{span:3, offset:4}} 
+              className="displayData blueColor">{props.title}</Col>
+        <Col  xs={4} 
+              sm={4} 
+              md={4} 
+              className="displayData rightAlignData">{props.data}</Col>
       </Row>
     </Container>
   );
@@ -38,8 +45,16 @@ function DisplayButton(props){
   return(
     <Container>
       <Row>
-        <Col xs={{span:7, offset:1}} sm={{span:4, offset:4}} md={{span:4, offset:3}} lg={{span:3, offset:4}} className="displayData">{props.title}</Col>
-        <Col xs={4} sm={4} md={{span:3, offset:1}} lg={3} className="leftAlignData "><Button>x 5</Button></Col>
+        <Col  xs={{span:7, offset:1}} 
+              sm={{span:4, offset:4}} 
+              md={{span:4, offset:3}} 
+              lg={{span:3, offset:4}} 
+              className="displayData blueColor">{props.title}</Col>
+        <Col  xs={4} 
+              sm={4} 
+              md={{span:3, offset:1}} 
+              lg={3} 
+              className="leftAlignData "><Button variant="success" className="buttonTextColor">x 5</Button></Col>
       </Row>
     </Container>
   );
@@ -193,16 +208,6 @@ class App extends Component{
         <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
         <Row><DisplayButton title={"Change Bet"} /></Row>
         <Row><Display title={"Funds"} data={this.state.funds} /></Row>
-
-        {this.state.point !== 0 && 
-          <Row className="aboveWhiteSpace">
-            <Col xs={12}><h3 className="center">Establish Point</h3></Col>           
-            <Col xs={{span:8, offset:2}} sm={{span:4, offset:4}} className="pointArea">
-              {this.state.point}
-            </Col> 
-          </Row>                     
-        }
-
         <Row>
           <Col className="buttonStyle">
             <Button variant="success" 

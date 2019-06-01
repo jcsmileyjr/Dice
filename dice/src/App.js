@@ -80,15 +80,9 @@ class App extends Component{
     //then its a automatic win. If its a 2 or 3, then its a automatic lose.
     if(this.state.point === 0 || this.state.point === "Win" || this.state.point === "Lose"){
       if(newPoint === 7){
-        let text = "Play Again";
-        const winLoss = true;
-        this.resetGame(newPoint,text, winLoss);
-        return;
+        this.resetGameWin();
       }else if(newPoint === 2 || newPoint===3){
-        let text = "Play Again";
-        const winLoss = false;
-        this.resetGame(newPoint,text, winLoss);
-        return;
+        this.resetGameLose();
       }else {
         let text = "Roll Again";
         this.establishPoint(newPoint, text);  
@@ -98,19 +92,29 @@ class App extends Component{
      
     //if the user hit the point, reset the game and show the user they won
     if(newPoint === this.state.point){
-      let text = "Play Again";
-      const winLoss = true;
-      this.resetGame(newPoint,text, winLoss);
-      return;
+      this.resetGameWin();
     }
 
     //if the user hit a 7, reset the game and show the user they lost
     if(newPoint === 7){
-      let text = "Play Again";
-      const winLoss = false;
-      this.resetGame(newPoint,text, winLoss);
-      return;
+      this.resetGameLose();
     }    
+  }
+
+  //reset the game if won
+  resetGameWin = () =>{
+    let text = "Play Again";
+    const winLoss = true;
+    this.resetGame(text, winLoss);
+    return;    
+  }
+
+  //reset the game if lose
+  resetGameLose = () =>{
+    let text = "Play Again";
+    const winLoss = false;
+    this.resetGame(text, winLoss);
+    return;    
   }
 
   //set the point for the user, change the button text and instruction's text
@@ -128,8 +132,8 @@ class App extends Component{
     })); 
   }
   
-  //If the point is hit, reset game state
-  resetGame = (point, text, winLoss) =>{
+  //reset game state based on if the player win or lose
+  resetGame = (text, winLoss) =>{
     if(winLoss) {
       this.setState(previousState => ({
         point: "Win",

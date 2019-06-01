@@ -23,6 +23,29 @@
   border-style: solid;
   border-width: 1px;
 }
+
+.displayData {
+  font-size: 5vh; 
+}
+
+.rightAlignData {
+  text-align: center;
+}
+
+.leftAlignData {
+  text-align: left;
+}
+
+/*Change the position of the data props associated Display componets*/
+@media screen and  (min-width:1020px){
+  .rightAlignData {
+    text-align: left;
+  }
+
+  .leftAlignData {
+    margin-left: 0 !important;
+  }  
+}
 /********   End of Point Component    ********/
 
 /********   Start of Dice Component    ********/

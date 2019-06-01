@@ -26,8 +26,20 @@ function Display(props){
   return(
     <Container>
       <Row>
-        <Col><h5>{props.title}</h5></Col>
-        <Col>{props.data}</Col>
+        <Col xs={{span:7, offset:1}} sm={{span:4, offset:4}} md={{span:4, offset:3}} lg={{span:3, offset:4}} className="displayData">{props.title}</Col>
+        <Col xs={4} sm={4} md={4} className="displayData rightAlignData">{props.data}</Col>
+      </Row>
+    </Container>
+  );
+}
+
+//Standard information box to display label and text
+function DisplayButton(props){
+  return(
+    <Container>
+      <Row>
+        <Col xs={{span:7, offset:1}} sm={{span:4, offset:4}} md={{span:4, offset:3}} lg={{span:3, offset:4}} className="displayData">{props.title}</Col>
+        <Col xs={4} sm={4} md={{span:3, offset:1}} lg={3} className="leftAlignData "><Button>x 5</Button></Col>
       </Row>
     </Container>
   );
@@ -69,6 +81,8 @@ class App extends Component{
       leftDice:5,
       rightDice:4,
       point:0,
+      bet:0,
+      funds:0,
       buttonText:"Start Game",
       instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7. If you roll a 2 or 3 on the come out roll, its a loss.",
     }
@@ -175,6 +189,10 @@ class App extends Component{
           <Col className="leftDice"><Dice dice = {this.state.leftDice} /></Col>
           <Col className="rightDice"><Dice dice = {this.state.rightDice} /></Col>
         </Row>
+        <Row><Display title={"Current Point"} data={this.state.point} /></Row>
+        <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
+        <Row><DisplayButton title={"Change Bet"} /></Row>
+        <Row><Display title={"Funds"} data={this.state.funds} /></Row>
 
         {this.state.point !== 0 && 
           <Row className="aboveWhiteSpace">

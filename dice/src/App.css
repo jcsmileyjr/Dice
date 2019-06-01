@@ -30,6 +30,11 @@
 .rightDice {
   text-align: left;
 }
+
+.diceColors {
+  //background-color: black;
+  color: white;
+}
 /********   End of Dice Component    ********/
 
 /********** Old Stuff*********/

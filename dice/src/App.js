@@ -28,16 +28,16 @@ function Dice(props){
           <Col><FontAwesomeIcon icon="dice-five" size="6x" color="navy"/></Col>
         }
         {props.dice === 4 &&
-          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+          <Col><FontAwesomeIcon icon="dice-four" size="6x" color="navy"/></Col>
         }
         {props.dice === 3 &&
-          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+          <Col><FontAwesomeIcon icon="dice-three" size="6x" color="navy"/></Col>
         }
         {props.dice === 2 &&
-          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+          <Col><FontAwesomeIcon icon="dice-two" size="6x" color="navy"/></Col>
         }  
         {props.dice === 1 &&
-          <Col><FontAwesomeIcon icon="dice-five" size="6x"/></Col>
+          <Col><FontAwesomeIcon icon="dice-one" size="6x" color="navy"/></Col>
         }                         
       </Row>
     </Container>
@@ -49,7 +49,7 @@ class App extends Component{
     super(props);
     this.state ={
       leftDice:5,
-      rightDice:5,
+      rightDice:4,
       point:10,
       dice:"",
       buttonText:"Start Game",

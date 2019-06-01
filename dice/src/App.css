@@ -7,6 +7,10 @@
   background-color:#ECE7E7;
   height: 100vh;
 }
+
+.aboveWhiteSpace {
+  margin-top: 3vh;
+}
 /********   End of Global    ********/
 
 /********   Start of Point Component    ********/
@@ -30,12 +34,22 @@
 .rightDice {
   text-align: left;
 }
-
-.diceColors {
-  //background-color: black;
-  color: white;
-}
 /********   End of Dice Component    ********/
+
+/********   Start of Button Component    ********/
+.buttonStyle {
+  text-align: center;
+  font-size: 10vh;
+}
+
+.buttonTextColor {
+  color: black;
+}
+/********   End of Button Component    ********/
+
+/********   Start of Instructions Component    ********/
+
+/********   End of Instructions Component    ********/
 
 /********** Old Stuff*********/
 .App {

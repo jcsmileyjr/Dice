@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -53,7 +53,7 @@ class App extends Component{
       point:10,
       dice:"",
       buttonText:"Start Game",
-      instructions:"",
+      instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7.",
     }
   }
 
@@ -65,9 +65,27 @@ class App extends Component{
           <Col className="leftDice"><Dice dice = {this.state.leftDice} /></Col>
           <Col className="rightDice"><Dice dice = {this.state.rightDice} /></Col>
         </Row>
+
+        {this.state.point !== 0 && 
+          <Row className="aboveWhiteSpace">
+            <Col xs={12}><h3 className="center">Establish Point</h3></Col>           
+            <Col xs={{span:8, offset:2}} sm={{span:4, offset:4}} className="pointArea">
+              {this.state.point}
+            </Col> 
+          </Row>                     
+        }
+
         <Row>
-          <Col xs={{span:8, offset:2}} sm={{span:4, offset:4}} className="pointArea">
-            {this.state.point !== 0 && this.state.point}
+          <Col className="buttonStyle">
+            <Button variant="success" size="lg" className="buttonTextColor">
+              {this.state.buttonText}
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:6, offset:3}}>
+            <h4>Instructions</h4>
+            <p>{this.state.instructions}</p>          
           </Col>
         </Row>
       </Container>      

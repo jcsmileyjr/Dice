@@ -4,9 +4,9 @@ import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne} from '@fortawesome/free-solid-svg-icons'
+import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne);
+library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne);
 
 function Title(props){
   return(
@@ -24,6 +24,9 @@ function Dice(props){
   return(
     <Container>
       <Row>
+        {props.dice === 6 &&
+          <Col><FontAwesomeIcon icon="dice-six" size="6x" color="navy"/></Col>
+        }        
         {props.dice === 5 &&
           <Col><FontAwesomeIcon icon="dice-five" size="6x" color="navy"/></Col>
         }
@@ -50,11 +53,35 @@ class App extends Component{
     this.state ={
       leftDice:5,
       rightDice:4,
-      point:10,
-      dice:"",
+      point:0,
       buttonText:"Start Game",
       instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7.",
     }
+  }
+
+  rollDice = (text) =>{
+    const randomLeftDice = Math.floor(Math.random() * 6) + 1; //get random number for dice
+    const randomRightDice = Math.floor(Math.random() * 6) + 1;//get random number for dice
+    const newPoint = randomLeftDice + randomRightDice; //get new point
+    this.setState(previousState => ({
+      leftDice: randomLeftDice,
+    }));
+    
+    this.setState(previousState => ({
+      rightDice: randomRightDice,
+    }));
+    
+    this.setState(previousState => ({
+      point: newPoint,
+    }));    
+
+    this.setState(previousState => ({
+      instructions: "Roll the dice again till you hit your point or lose by hitting a 7",
+    }));
+    
+    this.setState(previousState => ({
+      buttonText: text,
+    }));    
   }
 
   render(){
@@ -77,7 +104,10 @@ class App extends Component{
 
         <Row>
           <Col className="buttonStyle">
-            <Button variant="success" size="lg" className="buttonTextColor">
+            <Button variant="success" 
+                    size="lg"
+                    onClick={() => {this.rollDice("Roll Again")}} 
+                    className="buttonTextColor">
               {this.state.buttonText}
             </Button>
           </Col>

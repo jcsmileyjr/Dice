@@ -59,10 +59,11 @@ class App extends Component{
     }
   }
 
-  rollDice = (text) =>{
+  rollDice = () =>{
     const randomLeftDice = Math.floor(Math.random() * 6) + 1; //get random number for dice
     const randomRightDice = Math.floor(Math.random() * 6) + 1;//get random number for dice
     const newPoint = randomLeftDice + randomRightDice; //get new point
+
     this.setState(previousState => ({
       leftDice: randomLeftDice,
     }));
@@ -70,9 +71,24 @@ class App extends Component{
     this.setState(previousState => ({
       rightDice: randomRightDice,
     }));
-    
+
+    //establish the point for the user
+    if(this.state.point === 0){
+      let text = "Roll Again";
+      this.establishPoint(newPoint, text);  
+    }
+     
+    //if the user hit the point, reset the game
+    if(newPoint === this.state.point){
+      let text = "Start Game";
+      this.resetGame(newPoint,text)
+    }
+  }
+
+  //set the point for the user, change the button text and instruction's text
+  establishPoint = (point, text) =>{
     this.setState(previousState => ({
-      point: newPoint,
+      point: point,
     }));    
 
     this.setState(previousState => ({
@@ -81,8 +97,23 @@ class App extends Component{
     
     this.setState(previousState => ({
       buttonText: text,
-    }));    
+    })); 
   }
+  
+  //If the point is hit, reset game state
+  resetGame = (point, text) =>{
+    this.setState(previousState => ({
+      point: 0,
+    }));    
+
+    this.setState(previousState => ({
+      instructions: "The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7.",
+    }));
+    
+    this.setState(previousState => ({
+      buttonText: text,
+    })); 
+  }   
 
   render(){
     return(
@@ -106,7 +137,7 @@ class App extends Component{
           <Col className="buttonStyle">
             <Button variant="success" 
                     size="lg"
-                    onClick={() => {this.rollDice("Roll Again")}} 
+                    onClick={() => {this.rollDice()}} 
                     className="buttonTextColor">
               {this.state.buttonText}
             </Button>

@@ -76,11 +76,17 @@ class App extends Component{
       rightDice: randomRightDice, //change the image of the right dice
     }));
 
-    //establish the point for the user. If the user roll a 7 on the come out roll, then its a automatic win.
+    //establish the point for the user. If the user roll a 7 on the come out roll,
+    //then its a automatic win. If its a 2 or 3, then its a automatic lose.
     if(this.state.point === 0 || this.state.point === "Win" || this.state.point === "Lose"){
       if(newPoint === 7){
         let text = "Play Again";
         const winLoss = true;
+        this.resetGame(newPoint,text, winLoss);
+        return;
+      }else if(newPoint === 2 || newPoint===3){
+        let text = "Play Again";
+        const winLoss = false;
         this.resetGame(newPoint,text, winLoss);
         return;
       }else {
@@ -105,22 +111,6 @@ class App extends Component{
       this.resetGame(newPoint,text, winLoss);
       return;
     }    
-  }
-
-  checkIfWinLose = (point) =>{
-    let text = "Play Again";
-
-    //if the user hit a 7, reset the game and show the user they lost
-    if(point === 7){
-      const winLoss = false;
-      this.resetGame(point,text, winLoss);
-    }
-
-    //if the user hit the point, reset the game and show the user they won
-    if(point === this.state.point){      
-      const winLoss = true;
-      this.resetGame(point,text, winLoss);
-    }      
   }
 
   //set the point for the user, change the button text and instruction's text
@@ -148,8 +138,7 @@ class App extends Component{
       this.setState(previousState => ({
         point: "Lose",
       }));      
-    }
-    
+    }    
 
     this.setState(previousState => ({
       instructions: "The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7.",

@@ -8,6 +8,7 @@ import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne} f
 
 library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne);
 
+//Nav component for the app
 function Title(props){
   return(
     <Container>
@@ -20,6 +21,7 @@ function Title(props){
   );
 }
 
+//component that display a dice based on a random number given as a prop
 function Dice(props){
   return(
     <Container>
@@ -47,6 +49,7 @@ function Dice(props){
   );
 }
 
+//Dice game that simulate rolling two dice with the intent of hitting the inital sum of dice again before the sum of 7 is rolled
 class App extends Component{
   constructor(props){
     super(props);
@@ -59,17 +62,18 @@ class App extends Component{
     }
   }
 
+  //method in the button that simulate the rolling of the dice, update the state, and compute the logic
   rollDice = () =>{
     const randomLeftDice = Math.floor(Math.random() * 6) + 1; //get random number for dice
     const randomRightDice = Math.floor(Math.random() * 6) + 1;//get random number for dice
     const newPoint = randomLeftDice + randomRightDice; //get new point
 
     this.setState(previousState => ({
-      leftDice: randomLeftDice,
+      leftDice: randomLeftDice, //change the image of the left dice
     }));
     
     this.setState(previousState => ({
-      rightDice: randomRightDice,
+      rightDice: randomRightDice, //change the image of the right dice
     }));
 
     //establish the point for the user
@@ -90,8 +94,7 @@ class App extends Component{
       let text = "Play Again";
       const winLoss = false;
       this.resetGame(newPoint,text, winLoss);
-    }  
-console.log(this.state.point);      
+    }    
   }
 
   //set the point for the user, change the button text and instruction's text

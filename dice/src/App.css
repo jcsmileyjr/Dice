@@ -2,7 +2,54 @@
 .center {
   text-align: center;
 }
+
+.appBackground {
+  background-color:#ECE7E7;
+  height: 100vh;
+}
+
+.aboveWhiteSpace {
+  margin-top: 3vh;
+}
 /********   End of Global    ********/
+
+/********   Start of Point Component    ********/
+.pointArea {
+  text-align: center;
+  height: 25vh;
+  width: 50%;
+  background-color: white;
+  font-size: 10vh;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+}
+/********   End of Point Component    ********/
+
+/********   Start of Dice Component    ********/
+.leftDice {
+  text-align: right;
+}
+
+.rightDice {
+  text-align: left;
+}
+/********   End of Dice Component    ********/
+
+/********   Start of Button Component    ********/
+.buttonStyle {
+  text-align: center;
+  font-size: 10vh;
+}
+
+.buttonTextColor {
+  color: black;
+}
+/********   End of Button Component    ********/
+
+/********   Start of Instructions Component    ********/
+
+/********   End of Instructions Component    ********/
 
 /********** Old Stuff*********/
 .App {

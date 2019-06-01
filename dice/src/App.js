@@ -21,6 +21,18 @@ function Title(props){
   );
 }
 
+//Standard information box to display label and text
+function Display(props){
+  return(
+    <Container>
+      <Row>
+        <Col><h5>{props.title}</h5></Col>
+        <Col>{props.data}</Col>
+      </Row>
+    </Container>
+  );
+}
+
 //component that display a dice based on a random number given as a prop
 function Dice(props){
   return(

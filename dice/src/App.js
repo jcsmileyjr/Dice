@@ -13,9 +13,48 @@ function Title(props){
   return(
     <Container>
       <Row>
-        <Col className="center">
+        <Col className="center blueColor">
         <h1>Let's Play Dice</h1>
         </Col>
+      </Row>
+    </Container>
+  );
+}
+
+//Standard information box to display label and text
+function Display(props){
+  return(
+    <Container>
+      <Row>
+        <Col  xs={{span:7, offset:1}} 
+              sm={{span:4, offset:4}} 
+              md={{span:4, offset:3}} 
+              lg={{span:3, offset:4}} 
+              className="displayData blueColor">{props.title}</Col>
+        <Col  xs={4} 
+              sm={4} 
+              md={4} 
+              className="displayData rightAlignData">{props.data}</Col>
+      </Row>
+    </Container>
+  );
+}
+
+//Standard information box to display label and text
+function DisplayButton(props){
+  return(
+    <Container>
+      <Row>
+        <Col  xs={{span:7, offset:1}} 
+              sm={{span:4, offset:4}} 
+              md={{span:4, offset:3}} 
+              lg={{span:3, offset:4}} 
+              className="displayData blueColor">{props.title}</Col>
+        <Col  xs={4} 
+              sm={4} 
+              md={{span:3, offset:1}} 
+              lg={3} 
+              className="leftAlignData "><Button variant="success" className="buttonTextColor">x 5</Button></Col>
       </Row>
     </Container>
   );
@@ -57,6 +96,8 @@ class App extends Component{
       leftDice:5,
       rightDice:4,
       point:0,
+      bet:0,
+      funds:0,
       buttonText:"Start Game",
       instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7. If you roll a 2 or 3 on the come out roll, its a loss.",
     }
@@ -163,16 +204,10 @@ class App extends Component{
           <Col className="leftDice"><Dice dice = {this.state.leftDice} /></Col>
           <Col className="rightDice"><Dice dice = {this.state.rightDice} /></Col>
         </Row>
-
-        {this.state.point !== 0 && 
-          <Row className="aboveWhiteSpace">
-            <Col xs={12}><h3 className="center">Establish Point</h3></Col>           
-            <Col xs={{span:8, offset:2}} sm={{span:4, offset:4}} className="pointArea">
-              {this.state.point}
-            </Col> 
-          </Row>                     
-        }
-
+        <Row><Display title={"Current Point"} data={this.state.point} /></Row>
+        <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
+        <Row><DisplayButton title={"Change Bet"} /></Row>
+        <Row><Display title={"Funds"} data={this.state.funds} /></Row>
         <Row>
           <Col className="buttonStyle">
             <Button variant="success" 
@@ -184,7 +219,7 @@ class App extends Component{
           </Col>
         </Row>
         <Row>
-          <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:6, offset:3}}>
+          <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:4, offset:4}}>
             <h4>Instructions</h4>
             <p>{this.state.instructions}</p>          
           </Col>

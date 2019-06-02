@@ -54,7 +54,11 @@ function DisplayButton(props){
               sm={4} 
               md={{span:3, offset:1}} 
               lg={3} 
-              className="leftAlignData "><Button variant="success" className="buttonTextColor">x 5</Button></Col>
+              className="leftAlignData ">
+                <Button variant="success" 
+                        onClick={() => {props.addToBet()}}
+                        className="buttonTextColor">x 5</Button>
+        </Col>
       </Row>
     </Container>
   );
@@ -150,6 +154,7 @@ class App extends Component{
     const winLoss = true;
     this.resetGame(text, winLoss);
     this.winBet();
+    this.resetBet();
     return;    
   }
 
@@ -159,6 +164,7 @@ class App extends Component{
     const winLoss = false;
     this.resetGame(text, winLoss);
     this.loseBet();
+    this.resetBet();    
     return;    
   }
 
@@ -198,17 +204,41 @@ class App extends Component{
     })); 
   }   
 
+  //method to add to the user funds the bet amount if win. Called in rollDice().
   winBet = () =>{
     this.setState(previousState => ({
       funds: this.state.bet + previousState.funds,
     }));     
   }
 
+  //method to subtract the bet amount from the user funds if lose. Called in rollDice().
   loseBet = () =>{
     this.setState(previousState => ({
       funds: previousState.funds - this.state.bet,
     }));     
   }  
+
+  //method to increase the bet amount up to the fund limit. If the bet amount is greater then fund
+  //then the bet amount start over at 5.
+  increaseBet = () =>{
+    //const betLimit = this.state.funds + this.state.bet;
+    if(this.state.bet >= this.state.funds){
+      this.setState(previousState => ({
+        bet: 5,
+      }));      
+    }else {
+      this.setState(previousState => ({
+        bet: previousState.bet + 5,
+      }));
+    }
+  }
+
+  //method to reset bet amount after each game. Call in loseBet() & winBet()
+  resetBet = () =>{
+    this.setState(previousState => ({
+      bet: 5,
+    }));    
+  }
 
   render(){
     return(
@@ -220,7 +250,7 @@ class App extends Component{
         </Row>
         <Row><Display title={"Current Point"} data={this.state.point} /></Row>
         <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
-        <Row><DisplayButton title={"Increase Bet"} /></Row>
+        <Row><DisplayButton title={"Increase Bet"} addToBet = {this.increaseBet} /></Row>
         <Row><Display title={"Funds"} data={this.state.funds} /></Row>
         <Row>
           <Col className="buttonStyle">

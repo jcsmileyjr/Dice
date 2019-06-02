@@ -199,7 +199,7 @@ class App extends Component{
     }    
 
     this.setState(previousState => ({
-      instructions: "The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7.",
+      instructions: "The objective of the game is roll the dice to establish a point or a 7 on the first roll. \nThen re-roll the dice till you hit the point again or lose by hitting a 7.",
     }));
     
     this.setState(previousState => ({
@@ -293,10 +293,15 @@ class App extends Component{
           <Col className="leftDice"><Dice dice = {this.state.leftDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.leftRollingDice} /></Col>
           <Col className="rightDice"><Dice dice = {this.state.rightDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.rightRollingDice} /></Col>
         </Row>
-        <Row><Display title={"Current Point"} data={this.state.point} /></Row>
-        <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
-        <Row><DisplayButton title={"Increase Bet"} addToBet = {this.increaseBet} /></Row>
-        <Row><Display title={"Funds"} data={this.state.funds} /></Row>
+        {this.state.point !== 0  &&
+          <div>
+          <Row><Display title={"Current Point"} data={this.state.point} /></Row>
+          <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
+          <Row><DisplayButton title={"Increase Bet"} addToBet = {this.increaseBet} /></Row>
+          <Row><Display title={"Funds"} data={this.state.funds} /></Row>
+          </div>
+        }
+
         <Row>
           <Col className="buttonStyle">
             <Button variant="success" 

@@ -55,6 +55,24 @@
 .rightDice {
   text-align: left;
 }
+
+.leftRollingDice {
+  animation-name: bounce;
+  animation-duration: .8s;
+  animation-iteration-count:infinite;  
+}
+
+.rightRollingDice {
+  animation-name: bounce;
+  animation-duration: 1s;
+  animation-iteration-count:5;  
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
 /********   End of Dice Component    ********/
 
 /********   Start of Button Component    ********/

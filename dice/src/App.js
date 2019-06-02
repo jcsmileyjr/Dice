@@ -70,22 +70,22 @@ function Dice(props){
     <Container>
       <Row>
         {props.dice === 6 &&
-          <Col><FontAwesomeIcon icon="dice-six" size="6x" color="navy"/></Col>
+          <Col><FontAwesomeIcon icon="dice-six" size="6x" color={props.startGameDiceColor}/></Col>
         }        
         {props.dice === 5 &&
-          <Col><FontAwesomeIcon icon="dice-five" size="6x" color="navy"/></Col>
+          <Col><FontAwesomeIcon icon="dice-five" size="6x" color={props.startGameDiceColor}/></Col>
         }
         {props.dice === 4 &&
-          <Col><FontAwesomeIcon icon="dice-four" size="6x" color="navy"/></Col>
+          <Col><FontAwesomeIcon icon="dice-four" size="6x" color={props.startGameDiceColor}/></Col>
         }
         {props.dice === 3 &&
-          <Col><FontAwesomeIcon icon="dice-three" size="6x" color="navy"/></Col>
+          <Col><FontAwesomeIcon icon="dice-three" size="6x" color={props.startGameDiceColor}/></Col>
         }
         {props.dice === 2 &&
-          <Col><FontAwesomeIcon icon="dice-two" size="6x" color="navy"/></Col>
+          <Col><FontAwesomeIcon icon="dice-two" size="6x" color={props.startGameDiceColor}/></Col>
         }  
         {props.dice === 1 &&
-          <Col><FontAwesomeIcon icon="dice-one" size="6x" color="navy"/></Col>
+          <Col><FontAwesomeIcon icon="dice-one" size="6x" color={props.startGameDiceColor}/></Col>
         }                         
       </Row>
     </Container>
@@ -103,6 +103,7 @@ class App extends Component{
       bet:5,
       funds:25,
       buttonText:"Start Game",
+      diceStartColor:"green",
       instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7. If you roll a 2 or 3 on the come out roll, its a loss.",
     }
   }
@@ -132,7 +133,8 @@ class App extends Component{
         return;
       }else {
         let text = "Roll Again";
-        this.establishPoint(newPoint, text);  
+        this.establishPoint(newPoint, text); 
+        this.gameDiceColor();         
         return;
       }
     }
@@ -155,6 +157,7 @@ class App extends Component{
     this.resetGame(text, winLoss);
     this.winBet();
     this.resetBet();
+    this.gameDiceColor();    
     return;    
   }
 
@@ -164,7 +167,8 @@ class App extends Component{
     const winLoss = false;
     this.resetGame(text, winLoss);
     this.loseBet();
-    this.resetBet();    
+    this.resetBet();
+    this.gameDiceColor();        
     return;    
   }
 
@@ -240,13 +244,27 @@ class App extends Component{
     }));    
   }
 
+  //change the dice color between each game
+  gameDiceColor = () =>{
+  if(this.state.diceStartColor === "green") {
+    this.setState(previousState => ({
+      diceStartColor: "navy",
+    })); 
+  }else {
+    this.setState(previousState => ({
+      diceStartColor: "green",
+    })); 
+  }
+      
+  }
+
   render(){
     return(
       <Container className="appBackground">
         <Row><Title /></Row>        
         <Row>
-          <Col className="leftDice"><Dice dice = {this.state.leftDice} /></Col>
-          <Col className="rightDice"><Dice dice = {this.state.rightDice} /></Col>
+          <Col className="leftDice"><Dice dice = {this.state.leftDice} startGameDiceColor={this.state.diceStartColor} /></Col>
+          <Col className="rightDice"><Dice dice = {this.state.rightDice} startGameDiceColor={this.state.diceStartColor} /></Col>
         </Row>
         <Row><Display title={"Current Point"} data={this.state.point} /></Row>
         <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>

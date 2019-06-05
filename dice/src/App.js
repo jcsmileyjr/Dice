@@ -2,128 +2,12 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 import GameOver from './componets/GameOver';
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons'
-
-library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd);
-
-//Nav component for the app
-function Title(props){
-  return(
-    <Container>
-      <Row>
-        <Col className="center blueColor">
-        <h1>Let's Play Dice</h1>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-
-//Standard information box to display label and text
-function Display(props){
-  return(
-    <Container>
-      <Row>
-        <Col  xs={{span:7, offset:1}} 
-              sm={{span:4, offset:4}} 
-              md={{span:4, offset:3}} 
-              lg={{span:3, offset:4}} 
-              className="displayData blueColor">{props.title}</Col>
-        <Col  xs={4} 
-              sm={4} 
-              md={4} 
-              className="displayData rightAlignData">{props.data}</Col>
-      </Row>
-    </Container>
-  );
-}
-
-//Standard information box to display label and text
-function DisplayButton(props){
-  return(
-    <Container>
-      <Row>
-        <Col  xs={{span:7, offset:1}} 
-              sm={{span:4, offset:4}} 
-              md={{span:4, offset:3}} 
-              lg={{span:3, offset:4}} 
-              className="displayData blueColor">{props.title}</Col>
-        <Col  xs={4} 
-              sm={4} 
-              md={{span:3, offset:1}} 
-              lg={3} 
-              className="leftAlignData ">
-                <Button variant="success" 
-                        onClick={() => {props.addToBet()}}
-                        className="buttonTextColor">x 5</Button>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-
-//component called when the player wins Shows a rising dollar sign
-function DollarSign(props){
-  return(
-    <Container>
-      <Row className="center">
-        <Col><h4>You Won this round!!!</h4></Col>
-      </Row>
-      <Row className="center">
-        <Col className={`${props.rising}`}>
-        <FontAwesomeIcon icon="dollar-sign" size="9x" />
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-
-//component called when the player lose, Shows a hand taking money
-function LoseMoney(props){
-  return(
-    <Container>
-      <Row className="center">
-        <Col><h4>You Lose this round!!!</h4></Col>
-      </Row>
-      <Row className="center">
-        <Col className={`${props.taking}`}>
-        <FontAwesomeIcon icon="hand-holding-usd" size="9x" />
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-
-//component that display a dice based on a random number given as a prop
-function Dice(props){
-  return(
-    <Container>
-      <Row>
-        {props.dice === 6 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-six" size="6x" color={props.startGameDiceColor} /></Col>
-        }        
-        {props.dice === 5 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-five" size="6x" color={props.startGameDiceColor} /></Col>
-        }
-        {props.dice === 4 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-four" size="6x" color={props.startGameDiceColor}/></Col>
-        }
-        {props.dice === 3 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-three" size="6x" color={props.startGameDiceColor}/></Col>
-        }
-        {props.dice === 2 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-two" size="6x" color={props.startGameDiceColor}/></Col>
-        }  
-        {props.dice === 1 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-one" size="6x" color={props.startGameDiceColor}/></Col>
-        }                         
-      </Row>
-    </Container>
-  );
-}
+import Title from './componets/Title';
+import Display from './componets/Display';
+import DisplayButton from './componets/DisplayButton';
+import DollarSign from './componets/DollarSign';
+import LoseMoney from './componets/LoseMoney';
+import Dice from './componets/Dice';
 
 //Dice game that simulate rolling two dice with the intent of hitting the inital sum of dice again before the sum of 7 is rolled
 class App extends Component{
@@ -131,8 +15,8 @@ class App extends Component{
     super(props);
     this.state ={
       playing:true,//if true allow user to play.If false, show bankrupt
-      leftDice:5,
-      rightDice:4,
+      leftDice:5,//used to pick the image of the left dice
+      rightDice:4,//used to pick the image of the right dice
       point:0,//current point (left dice plus right dice) the player is trying to roll again
       bet:5,//current bettting amount of player
       funds:25,//current fund amount of player
@@ -306,7 +190,7 @@ class App extends Component{
       rightRollingDice: "rightRollingDice",
     }));    
     
-    setTimeout(this.hideBouncingDice, 3000);
+    setTimeout(this.hideBouncingDice, 2000);
   } 
 
   //cancel the rolling dice animation
@@ -330,7 +214,7 @@ class App extends Component{
       risingDollarSign: "risingDollarSign",
     }));      
 
-    setTimeout(this.hideRisingDollarSign, 3000);
+    setTimeout(this.hideRisingDollarSign, 2000);
   }
 
   //cancel the rising dollar sign animation when a player has won
@@ -347,7 +231,7 @@ class App extends Component{
       losingMoneySign: "losingMoneySign",
     }));      
 
-    setTimeout(this.hideLosingDollarSign, 3000);
+    setTimeout(this.hideLosingDollarSign, 2000);
   }
 
   //cancel the rising dollar sign animation when a player has won

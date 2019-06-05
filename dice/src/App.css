@@ -67,9 +67,7 @@
 /*CSS use to show a rising dollar sign when the user wins or lose a round*/
 @keyframes rising {
   0% {font-size: 3vh};
-  20% {font-size: 4vh};
   40% {font-size: 5vh};
-  60% {font-size: 6vh};
   80% {font-size: 7vh};
   100% {font-size: 10vh};
 }

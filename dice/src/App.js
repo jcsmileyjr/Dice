@@ -3,31 +3,13 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 import GameOver from './componets/GameOver';
 import Title from './componets/Title';
+import Display from './componets/Display';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons'
 
 library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd);
-
-//Standard information box to display label and text
-function Display(props){
-  return(
-    <Container>
-      <Row>
-        <Col  xs={{span:7, offset:1}} 
-              sm={{span:4, offset:4}} 
-              md={{span:4, offset:3}} 
-              lg={{span:3, offset:4}} 
-              className="displayData blueColor">{props.title}</Col>
-        <Col  xs={4} 
-              sm={4} 
-              md={4} 
-              className="displayData rightAlignData">{props.data}</Col>
-      </Row>
-    </Container>
-  );
-}
 
 //Standard information box to display label and text
 function DisplayButton(props){

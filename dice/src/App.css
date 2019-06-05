@@ -51,12 +51,20 @@
 /*CSS use to show a rising dollar sign when the user wins a round*/
 .risingDollarSign {
   animation-name: rising;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-iteration-count: 1;
   color:gold;
 }
 
-/*CSS use to show a rising dollar sign when the user wins a round*/
+/*CSS use to show a rising dollar sign when the user lose a round*/
+.losingMoneySign {
+  animation-name: rising;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  color:red;
+}
+
+/*CSS use to show a rising dollar sign when the user wins or lose a round*/
 @keyframes rising {
   0% {font-size: 3vh};
   20% {font-size: 4vh};

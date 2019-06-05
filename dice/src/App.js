@@ -5,9 +5,9 @@ import GameOver from './componets/GameOver';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign} from '@fortawesome/free-solid-svg-icons'
+import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign);
+library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd);
 
 //Nav component for the app
 function Title(props){
@@ -70,8 +70,27 @@ function DollarSign(props){
   return(
     <Container>
       <Row className="center">
+        <Col><h4>You Won this round!!!</h4></Col>
+      </Row>
+      <Row className="center">
         <Col className={`${props.rising}`}>
         <FontAwesomeIcon icon="dollar-sign" size="9x" />
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+//component called when the player lose, Shows a hand taking money
+function LoseMoney(props){
+  return(
+    <Container>
+      <Row className="center">
+        <Col><h4>You Lose this round!!!</h4></Col>
+      </Row>
+      <Row className="center">
+        <Col className={`${props.taking}`}>
+        <FontAwesomeIcon icon="hand-holding-usd" size="9x" />
         </Col>
       </Row>
     </Container>
@@ -122,6 +141,7 @@ class App extends Component{
       leftRollingDice:"",//use to dynamic put animation css on the element to roll dice
       rightRollingDice:"",//dynamic put animation css on the right dice to simulate rolling
       risingDollarSign:"",//dynamic put animation css on the dollar sign to show it rising
+      losingMoneySign:"",
       instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7. If you roll a 2 or 3 on the come out roll, its a loss.",
     }
   }
@@ -184,7 +204,8 @@ class App extends Component{
     const winLoss = false;
     this.resetGame(text, winLoss);
     this.loseBet();
-    this.resetBet();       
+    this.resetBet();
+    this.showLosingDollarSign();//display money being taking away when player lose       
     return;    
   }
 
@@ -318,6 +339,23 @@ class App extends Component{
     this.setState(previousState => ({
       risingDollarSign: "",
     }));      
+  }
+  
+  showLosingDollarSign = () =>{
+
+    this.setState(previousState => ({
+      losingMoneySign: "losingMoneySign",
+    }));      
+
+    setTimeout(this.hideLosingDollarSign, 3000);
+  }
+
+  //cancel the rising dollar sign animation when a player has won
+  hideLosingDollarSign = () =>{
+
+    this.setState(previousState => ({
+      losingMoneySign: "",
+    }));      
   }   
 
   //Show the game over screen if funds dip below 0.
@@ -385,7 +423,10 @@ class App extends Component{
           {this.state.risingDollarSign !== "" &&
             <DollarSign rising={this.state.risingDollarSign} />          
           }
-          {this.state.risingDollarSign == "" &&
+          {this.state.losingMoneySign !=="" &&
+            <LoseMoney taking={this.state.losingMoneySign} />
+          }
+          {this.state.risingDollarSign === "" && this.state.losingMoneySign === "" &&
           <div>
           <Row>
           <Col className="buttonStyle">

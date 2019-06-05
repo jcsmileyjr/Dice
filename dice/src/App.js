@@ -2,25 +2,13 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 import GameOver from './componets/GameOver';
+import Title from './componets/Title';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons'
 
 library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd);
-
-//Nav component for the app
-function Title(props){
-  return(
-    <Container>
-      <Row>
-        <Col className="center blueColor">
-        <h1>Let's Play Dice</h1>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
 
 //Standard information box to display label and text
 function Display(props){

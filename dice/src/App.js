@@ -5,6 +5,8 @@ import GameOver from './componets/GameOver';
 import Title from './componets/Title';
 import Display from './componets/Display';
 import DisplayButton from './componets/DisplayButton';
+import DollarSign from './componets/DollarSign';
+import LoseMoney from './componets/LoseMoney';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,39 +14,6 @@ import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, f
 
 library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd);
 
-
-
-//component called when the player wins Shows a rising dollar sign
-function DollarSign(props){
-  return(
-    <Container>
-      <Row className="center">
-        <Col><h4>You Won this round!!!</h4></Col>
-      </Row>
-      <Row className="center">
-        <Col className={`${props.rising}`}>
-        <FontAwesomeIcon icon="dollar-sign" size="9x" />
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-
-//component called when the player lose, Shows a hand taking money
-function LoseMoney(props){
-  return(
-    <Container>
-      <Row className="center">
-        <Col><h4>You Lose this round!!!</h4></Col>
-      </Row>
-      <Row className="center">
-        <Col className={`${props.taking}`}>
-        <FontAwesomeIcon icon="hand-holding-usd" size="9x" />
-        </Col>
-      </Row>
-    </Container>
-  );
-}
 
 //component that display a dice based on a random number given as a prop
 function Dice(props){

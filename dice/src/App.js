@@ -5,9 +5,9 @@ import GameOver from './componets/GameOver';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne} from '@fortawesome/free-solid-svg-icons'
+import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne);
+library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign);
 
 //Nav component for the app
 function Title(props){
@@ -65,6 +65,19 @@ function DisplayButton(props){
   );
 }
 
+//component called when the player wins Shows a rising dollar sign
+function DollarSign(props){
+  return(
+    <Container>
+      <Row className="center">
+        <Col className={`${props.rising}`}>
+        <FontAwesomeIcon icon="dollar-sign" size="9x" />
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
 //component that display a dice based on a random number given as a prop
 function Dice(props){
   return(
@@ -98,7 +111,7 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state ={
-      playing:false,//if true allow user to play.If false, show bankrupt
+      playing:true,//if true allow user to play.If false, show bankrupt
       leftDice:5,
       rightDice:4,
       point:0,
@@ -108,6 +121,7 @@ class App extends Component{
       diceStartColor:"green",
       leftRollingDice:"",
       rightRollingDice:"",
+      risingDollarSign:"",
       instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7. If you roll a 2 or 3 on the come out roll, its a loss.",
     }
   }
@@ -157,9 +171,10 @@ class App extends Component{
   resetGameWin = () =>{
     let text = "Play Again";
     const winLoss = true;
-    this.resetGame(text, winLoss);
-    this.winBet();
-    this.resetBet();    
+    this.resetGame(text, winLoss);  //Let th player know he won and setup for next round
+    this.winBet();  //add the betting amount to the player funds
+    this.resetBet();  //reset the amount of the bet 
+    this.showRisingDollarSign();  //display the dollar sign when the player win
     return;    
   }
 
@@ -271,7 +286,7 @@ class App extends Component{
     }));    
     
     setTimeout(this.hideBouncingDice, 3000);
-  }
+  } 
 
   //cancel the rolling dice animation
   hideBouncingDice = () =>{
@@ -286,6 +301,24 @@ class App extends Component{
     this.rollDice();
     this.gameDiceColor(); //change the color of the dice back from blue to green
   }
+
+  //starts the rising dollar sign animation when a player has won
+  showRisingDollarSign = () =>{
+
+    this.setState(previousState => ({
+      risingDollarSign: "risingDollarSign",
+    }));      
+
+    setTimeout(this.hideRisingDollarSign, 3000);
+  }
+
+  //cancel the rising dollar sign animation when a player has won
+  hideRisingDollarSign = () =>{
+
+    this.setState(previousState => ({
+      risingDollarSign: "",
+    }));      
+  }   
 
   //Show the game over screen if funds dip below 0.
   showGameOver = () =>{
@@ -349,23 +382,30 @@ class App extends Component{
             <Row><Display title={"Funds"} data={this.state.funds} /></Row>
             </div>
           }
-
+          {this.state.risingDollarSign !== "" &&
+            <DollarSign rising={this.state.risingDollarSign} />          
+          }
+          {this.state.risingDollarSign == "" &&
+          <div>
           <Row>
-            <Col className="buttonStyle">
-              <Button variant="success" 
-                      size="lg"
-                      onClick={() => {this.showBouncingDice()}} 
-                      className="buttonTextColor">
-                {this.state.buttonText}
-              </Button>
-            </Col>
+          <Col className="buttonStyle">
+            <Button variant="success" 
+                    size="lg"
+                    onClick={() => {this.showBouncingDice()}} 
+                    className="buttonTextColor">
+              {this.state.buttonText}
+            </Button>
+          </Col>
           </Row>
           <Row>
-            <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:4, offset:4}}>
-              <h4>Instructions</h4>
-              <p>{this.state.instructions}</p>          
-            </Col>
-          </Row>   
+          <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:4, offset:4}}>
+            <h4>Instructions</h4>
+            <p>{this.state.instructions}</p>          
+          </Col>
+          </Row>
+          </div>         
+          }
+  
         </Container>     
         }
         {!this.state.playing && <GameOver restart={this.restartGame} />}

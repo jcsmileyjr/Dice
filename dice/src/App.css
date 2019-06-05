@@ -75,6 +75,22 @@
   50%  { transform: translateY(-20px); }
   100% { transform: translateY(0); }
 }
+
+.risingDollarSign {
+  animation-name: rising;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  color:gold;
+}
+
+@keyframes rising {
+  0% {font-size: 8vh};
+  20% {font-size: 7vh};
+  40% {font-size: 6vh};
+  60% {font-size: 5vh};
+  80% {font-size: 4vh};
+  100% {font-size: 3vh};
+}
 /********   End of Dice Component    ********/
 
 /********   Start of Button Component    ********/

@@ -17,6 +17,7 @@
 }
 /********   End of Global    ********/
 
+
 /********   Start of Point Component    ********/
 .pointArea {
   border-color: black;
@@ -89,6 +90,17 @@
 
 /********   Start of Instructions Component    ********/
 
+/********   End of Instructions Component    ********/
+
+/********   Start of Bankrupt Component    ********/
+.bankrupt {
+  background-color:white;
+  height: 101vh;
+}
+
+.buttonGameOverColor {
+  color: red;
+}
 /********   End of Instructions Component    ********/
 
 /********** Old Stuff*********/

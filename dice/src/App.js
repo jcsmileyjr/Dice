@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
+import GameOver from './componets/GameOver';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -97,6 +98,7 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state ={
+      playing:false,//if true allow user to play.If false, show bankrupt
       leftDice:5,
       rightDice:4,
       point:0,
@@ -285,40 +287,90 @@ class App extends Component{
     this.gameDiceColor(); //change the color of the dice back from blue to green
   }
 
+  //Show the game over screen if funds dip below 0.
+  showGameOver = () =>{
+    if(this.state.funds >= 0){
+      this.setState(previousState => ({
+        playing: false,
+      })); 
+    }    
+  }
+
+  //reset all state
+  restartGame = () =>{
+    this.setState(previousState => ({
+      playing: true,
+    }));
+    
+    this.setState(previousState => ({
+      point: 0,
+    }));    
+
+    this.setState(previousState => ({
+      instructions: "The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7. If you roll a 2 or 3 on the come out roll, its a loss.",
+    }));
+    
+    this.setState(previousState => ({
+      buttonText: "Start Game",
+    }));
+
+    this.setState(previousState => ({
+      leftDice: 5,
+    }));
+    
+    this.setState(previousState => ({
+      rightDice: 4,
+    }));    
+
+    this.setState(previousState => ({
+      bet: 5,
+    }));
+    
+    this.setState(previousState => ({
+      funds: 25,
+    }));    
+  }
+
   render(){
     return(
-      <Container className="appBackground">
-        <Row><Title /></Row>        
-        <Row>
-          <Col className="leftDice"><Dice dice = {this.state.leftDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.leftRollingDice} /></Col>
-          <Col className="rightDice"><Dice dice = {this.state.rightDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.rightRollingDice} /></Col>
-        </Row>
-        {this.state.point !== 0  &&
-          <div>
-          <Row><Display title={"Current Point"} data={this.state.point} /></Row>
-          <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
-          <Row><DisplayButton title={"Increase Bet"} addToBet = {this.increaseBet} /></Row>
-          <Row><Display title={"Funds"} data={this.state.funds} /></Row>
-          </div>
-        }
+      <div className="appBackground">
+        {this.state.playing &&
+        <Container>
+          <Row><Title /></Row>        
+          <Row>
+            <Col className="leftDice"><Dice dice = {this.state.leftDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.leftRollingDice} /></Col>
+            <Col className="rightDice"><Dice dice = {this.state.rightDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.rightRollingDice} /></Col>
+          </Row>
+          {this.state.point !== 0  &&
+            <div>
+            <Row><Display title={"Current Point"} data={this.state.point} /></Row>
+            <Row><Display title={"Current Bet"} data={this.state.bet} /></Row>
+            <Row><DisplayButton title={"Increase Bet"} addToBet = {this.increaseBet} /></Row>
+            <Row><Display title={"Funds"} data={this.state.funds} /></Row>
+            </div>
+          }
 
-        <Row>
-          <Col className="buttonStyle">
-            <Button variant="success" 
-                    size="lg"
-                    onClick={() => {this.showBouncingDice()}} 
-                    className="buttonTextColor">
-              {this.state.buttonText}
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:4, offset:4}}>
-            <h4>Instructions</h4>
-            <p>{this.state.instructions}</p>          
-          </Col>
-        </Row>
-      </Container>      
+          <Row>
+            <Col className="buttonStyle">
+              <Button variant="success" 
+                      size="lg"
+                      onClick={() => {this.showBouncingDice()}} 
+                      className="buttonTextColor">
+                {this.state.buttonText}
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:4, offset:4}}>
+              <h4>Instructions</h4>
+              <p>{this.state.instructions}</p>          
+            </Col>
+          </Row>   
+        </Container>     
+        }
+        {!this.state.playing && <GameOver restart={this.restartGame} />}
+
+      </div>      
     );
   }
 }

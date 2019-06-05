@@ -7,41 +7,7 @@ import Display from './componets/Display';
 import DisplayButton from './componets/DisplayButton';
 import DollarSign from './componets/DollarSign';
 import LoseMoney from './componets/LoseMoney';
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons'
-
-library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd);
-
-
-//component that display a dice based on a random number given as a prop
-function Dice(props){
-  return(
-    <Container>
-      <Row>
-        {props.dice === 6 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-six" size="6x" color={props.startGameDiceColor} /></Col>
-        }        
-        {props.dice === 5 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-five" size="6x" color={props.startGameDiceColor} /></Col>
-        }
-        {props.dice === 4 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-four" size="6x" color={props.startGameDiceColor}/></Col>
-        }
-        {props.dice === 3 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-three" size="6x" color={props.startGameDiceColor}/></Col>
-        }
-        {props.dice === 2 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-two" size="6x" color={props.startGameDiceColor}/></Col>
-        }  
-        {props.dice === 1 &&
-          <Col className={`${props.rolling}`}><FontAwesomeIcon icon="dice-one" size="6x" color={props.startGameDiceColor}/></Col>
-        }                         
-      </Row>
-    </Container>
-  );
-}
+import Dice from './componets/Dice';
 
 //Dice game that simulate rolling two dice with the intent of hitting the inital sum of dice again before the sum of 7 is rolled
 class App extends Component{
@@ -49,8 +15,8 @@ class App extends Component{
     super(props);
     this.state ={
       playing:true,//if true allow user to play.If false, show bankrupt
-      leftDice:5,
-      rightDice:4,
+      leftDice:5,//used to pick the image of the left dice
+      rightDice:4,//used to pick the image of the right dice
       point:0,//current point (left dice plus right dice) the player is trying to roll again
       bet:5,//current bettting amount of player
       funds:25,//current fund amount of player

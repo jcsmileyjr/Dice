@@ -51,7 +51,7 @@
 /*CSS use to show a rising dollar sign when the user wins a round*/
 .risingDollarSign {
   animation-name: rising;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-iteration-count: 1;
   color:gold;
 }
@@ -59,17 +59,17 @@
 /*CSS use to show a rising dollar sign when the user lose a round*/
 .losingMoneySign {
   animation-name: rising;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-iteration-count: 1;
   color:red;
 }
 
 /*CSS use to show a rising dollar sign when the user wins or lose a round*/
 @keyframes rising {
-  0% {font-size: 3vh};
-  40% {font-size: 5vh};
-  80% {font-size: 7vh};
-  100% {font-size: 10vh};
+  0% {font-size: 6vh};
+  20% {font-size: 10vh};
+  60% {font-size: 15vh};
+  100% {font-size: 20vh};
 }
 /********   End of Point Component    ********/
 

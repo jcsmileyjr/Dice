@@ -4,6 +4,7 @@ import './App.css';
 import GameOver from './componets/GameOver';
 import Title from './componets/Title';
 import Display from './componets/Display';
+import DisplayButton from './componets/DisplayButton';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,29 +12,7 @@ import { faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, f
 
 library.add(faDiceSix, faDiceFive, faDiceFour, faDiceThree, faDiceTwo, faDiceOne, faDollarSign, faHandHoldingUsd);
 
-//Standard information box to display label and text
-function DisplayButton(props){
-  return(
-    <Container>
-      <Row>
-        <Col  xs={{span:7, offset:1}} 
-              sm={{span:4, offset:4}} 
-              md={{span:4, offset:3}} 
-              lg={{span:3, offset:4}} 
-              className="displayData blueColor">{props.title}</Col>
-        <Col  xs={4} 
-              sm={4} 
-              md={{span:3, offset:1}} 
-              lg={3} 
-              className="leftAlignData ">
-                <Button variant="success" 
-                        onClick={() => {props.addToBet()}}
-                        className="buttonTextColor">x 5</Button>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
+
 
 //component called when the player wins Shows a rising dollar sign
 function DollarSign(props){
@@ -276,7 +255,7 @@ class App extends Component{
       rightRollingDice: "rightRollingDice",
     }));    
     
-    setTimeout(this.hideBouncingDice, 3000);
+    setTimeout(this.hideBouncingDice, 2000);
   } 
 
   //cancel the rolling dice animation
@@ -300,7 +279,7 @@ class App extends Component{
       risingDollarSign: "risingDollarSign",
     }));      
 
-    setTimeout(this.hideRisingDollarSign, 3000);
+    setTimeout(this.hideRisingDollarSign, 2000);
   }
 
   //cancel the rising dollar sign animation when a player has won
@@ -317,7 +296,7 @@ class App extends Component{
       losingMoneySign: "losingMoneySign",
     }));      
 
-    setTimeout(this.hideLosingDollarSign, 3000);
+    setTimeout(this.hideLosingDollarSign, 2000);
   }
 
   //cancel the rising dollar sign animation when a player has won

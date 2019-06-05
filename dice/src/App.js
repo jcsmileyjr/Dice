@@ -114,14 +114,14 @@ class App extends Component{
       playing:true,//if true allow user to play.If false, show bankrupt
       leftDice:5,
       rightDice:4,
-      point:0,
-      bet:5,
-      funds:25,
-      buttonText:"Start Game",
-      diceStartColor:"green",
-      leftRollingDice:"",
-      rightRollingDice:"",
-      risingDollarSign:"",
+      point:0,//current point (left dice plus right dice) the player is trying to roll again
+      bet:5,//current bettting amount of player
+      funds:25,//current fund amount of player
+      buttonText:"Start Game",//dynamic change text of main action button
+      diceStartColor:"green",//dynamic put animation css change on dice to change color of dice to show if its rolling or sitting still
+      leftRollingDice:"",//use to dynamic put animation css on the element to roll dice
+      rightRollingDice:"",//dynamic put animation css on the right dice to simulate rolling
+      risingDollarSign:"",//dynamic put animation css on the dollar sign to show it rising
       instructions:"The objective of the game is roll the dice to establish a point or a 7 on the first roll. Then re-roll the dice till you hit the point again or lose by hitting a 7. If you roll a 2 or 3 on the come out roll, its a loss.",
     }
   }

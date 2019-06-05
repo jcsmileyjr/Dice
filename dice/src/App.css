@@ -47,6 +47,24 @@
     margin-left: 0 !important;
   }  
 }
+
+/*CSS use to show a rising dollar sign when the user wins a round*/
+.risingDollarSign {
+  animation-name: rising;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  color:gold;
+}
+
+/*CSS use to show a rising dollar sign when the user wins a round*/
+@keyframes rising {
+  0% {font-size: 3vh};
+  20% {font-size: 4vh};
+  40% {font-size: 5vh};
+  60% {font-size: 6vh};
+  80% {font-size: 7vh};
+  100% {font-size: 10vh};
+}
 /********   End of Point Component    ********/
 
 /********   Start of Dice Component    ********/
@@ -58,39 +76,27 @@
   text-align: left;
 }
 
+/*CSS use to show a rolling dice at the start of a round*/
 .leftRollingDice {
   animation-name: bounce;
   animation-duration: .8s;
   animation-iteration-count:infinite;  
 }
 
+/*CSS use to show a rolling dice at the start of a round*/
 .rightRollingDice {
   animation-name: bounce;
   animation-duration: 1s;
   animation-iteration-count:5;  
 }
 
+/*CSS use to show a rolling dice bouncing up and down*/
 @keyframes bounce {
   0%   { transform: translateY(0); }
   50%  { transform: translateY(-20px); }
   100% { transform: translateY(0); }
 }
 
-.risingDollarSign {
-  animation-name: rising;
-  animation-duration: 3s;
-  animation-iteration-count: 1;
-  color:gold;
-}
-
-@keyframes rising {
-  0% {font-size: 8vh};
-  20% {font-size: 7vh};
-  40% {font-size: 6vh};
-  60% {font-size: 5vh};
-  80% {font-size: 4vh};
-  100% {font-size: 3vh};
-}
 /********   End of Dice Component    ********/
 
 /********   Start of Button Component    ********/

@@ -290,13 +290,20 @@ class App extends Component{
   render(){
     return(
       <div className="appBackground">
+        {/*If true, allow the user to play the application, If false, switch to the GameOver component*/}
         {this.state.playing &&
         <Container>
-          <Row><Title /></Row>        
+
+          {/* Display the title for the application */}
+          <Row><Title /></Row>
+
+          {/* Display the left and right dice */}        
           <Row>
             <Col className="leftDice"><Dice dice = {this.state.leftDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.leftRollingDice} /></Col>
             <Col className="rightDice"><Dice dice = {this.state.rightDice} startGameDiceColor={this.state.diceStartColor} rolling={this.state.rightRollingDice} /></Col>
           </Row>
+
+          {/* If the current point do not equal 0, then show the game stats like current  point, bet, increase button, etc.*/}
           {this.state.point !== 0  &&
             <div>
             <Row><Display title={"Current Point"} data={this.state.point} /></Row>
@@ -305,29 +312,37 @@ class App extends Component{
             <Row><Display title={"Funds"} data={this.state.funds} /></Row>
             </div>
           }
+
+          {/* Animation to be displayed if the player wins*/}
           {this.state.risingDollarSign !== "" &&
             <DollarSign rising={this.state.risingDollarSign} />          
           }
+
+          {/* Animation to be displayed if the player lose*/}
           {this.state.losingMoneySign !=="" &&
             <LoseMoney taking={this.state.losingMoneySign} />
           }
+
+          {/* If no animation is display, display the primary action button*/}
           {this.state.risingDollarSign === "" && this.state.losingMoneySign === "" &&
           <div>
           <Row>
-          <Col className="buttonStyle">
-            <Button variant="success" 
-                    size="lg"
-                    onClick={() => {this.showBouncingDice()}} 
-                    className="buttonTextColor">
-              {this.state.buttonText}
-            </Button>
-          </Col>
+            <Col className="buttonStyle">
+              <Button variant="success" 
+                      size="lg"
+                      onClick={() => {this.showBouncingDice()}} 
+                      className="buttonTextColor">
+                {this.state.buttonText}
+              </Button>
+            </Col>
           </Row>
+
+          {/* Display instructins to the player*/}
           <Row>
-          <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:4, offset:4}}>
-            <h4>Instructions</h4>
-            <p>{this.state.instructions}</p>          
-          </Col>
+            <Col className="aboveWhiteSpace" xs={{span:10, offset:1}} sm={{span:8, offset:2}} md={{span:4, offset:4}}>
+              <h4>Instructions</h4>
+              <p>{this.state.instructions}</p>          
+            </Col>
           </Row>
           </div>         
           }

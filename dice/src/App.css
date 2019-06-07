@@ -1,17 +1,23 @@
 /********   Start of Global    ********/
+/********   Start of Global    ********/
+/*Use throughout the app to center align something*/
 .center {
   text-align: center;
 }
 
+/*Use on the App.js file to set the background color to a light grey 
+and inital height to the screen size*/
 .appBackground {
   background-color:#ECE7E7;
   height: 101vh;
 }
 
+/*This is use throughout the app to add whitespace to the margin above a element*/
 .aboveWhiteSpace {
   margin-top: 3vh;
 }
 
+/*This is used throughout the app to set the color to blue*/
 .blueColor {
   color: navy;
 }
@@ -19,20 +25,17 @@
 
 
 /********   Start of Point Component    ********/
-.pointArea {
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-}
-
+/*Is use in the Display and DisplayButton components to set the font size*/
 .displayData {
   font-size: 5vh; 
 }
 
+/*Used on the Display component to align to the right the state being displayed like current point*/
 .rightAlignData {
   text-align: center;
 }
 
+/*Used on the DisplayButton component to left align the "Add to Bet" button*/
 .leftAlignData {
   text-align: left;
 }
@@ -74,10 +77,12 @@
 /********   End of Point Component    ********/
 
 /********   Start of Dice Component    ********/
+/*right align the left dice*/
 .leftDice {
   text-align: right;
 }
 
+/*left align the right dice*/
 .rightDice {
   text-align: left;
 }
@@ -106,6 +111,7 @@
 /********   End of Dice Component    ********/
 
 /********   Start of Button Component    ********/
+/*Set the primary button text font and to align to the center*/
 .buttonStyle {
   text-align: center;
   font-size: 10vh;
@@ -115,10 +121,6 @@
   color: black;
 }
 /********   End of Button Component    ********/
-
-/********   Start of Instructions Component    ********/
-
-/********   End of Instructions Component    ********/
 
 /********   Start of Bankrupt Component    ********/
 .bankrupt {
@@ -130,40 +132,3 @@
   color: red;
 }
 /********   End of Instructions Component    ********/
-
-/********** Old Stuff*********/
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/********** Old Stuff*********/

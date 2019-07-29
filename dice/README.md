@@ -1,7 +1,7 @@
 # Dice
 <hr>
 
-![Screen-shot of app in use](assets/dice-v1.gif) 
+![Screen-shot of app in use](assets/dice2.gif) 
 
 ### Table of Contents
 1. Purpose
